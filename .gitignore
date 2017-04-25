@@ -1,3 +1,5 @@
 .idea/*
 Total Commander.iml
 /bin/
+.classpath
+.project
