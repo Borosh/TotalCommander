@@ -55,6 +55,5 @@ public class Rtf extends JPanel {
         ablak.setLocation(600, 200);
         ablak.setSize(ablak.getMinimumSize());
         ablak.setVisible(true);
-        //boros
     }
 }
