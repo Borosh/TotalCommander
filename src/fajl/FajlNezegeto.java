@@ -12,17 +12,13 @@ import java.io.IOException;
 public class FajlNezegeto {
     static JFrame ablak = new JFrame();
 
-    public FajlNezegeto() {
-
-    }
-
-    public static boolean megnyit(String file) {
+    public FajlNezegeto(String file) {
         final int[] x = {600};
         final int[] y = {600};
 
         JPanel fajl = null;
         if (file.contains(".jpg")) {
-            fajl = new JPG.megnyit(file, x[0], y[0]);
+            fajl = new JPG(file, x[0], y[0]);
         } else if (file.contains(".ico")) {
             fajl = new Ikon.megnyit(file, x[0], y[0]);
         }
@@ -37,12 +33,11 @@ public class FajlNezegeto {
                 }
                 x[0] = ablak.getWidth();
                 y[0] = ablak.getHeight();
-                ablak.add(new JPG.megnyit(file, x[0], y[0]));
+                ablak.add(new JPG(file, x[0], y[0]));
 
             }
         });
         init();
-        return true;
     }
 
     private static void init() {
