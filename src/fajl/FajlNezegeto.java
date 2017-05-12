@@ -5,14 +5,14 @@ import fajl.szovegesFajlok.*;
 import javax.swing.*;
 
 public class FajlNezegeto {
-    private JFrame ablak = new JFrame();
-    private JPanel fajl = null;
-    private final int x = ablak.getContentPane().getWidth();
-    private final int y = ablak.getContentPane().getHeight();
 
     public FajlNezegeto(String file, String kiterjesztes) {
-        
-        init();
+    	JFrame ablak = new JFrame();
+        JPanel fajl = null;
+    	ablak.setBounds(500,200,600,600);
+        ablak.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        int x = ablak.getContentPane().getWidth();
+        int y = ablak.getContentPane().getHeight();
         
         if (kiterjesztes.equals("rtf")) {
         	fajl = new Rtf(file, x, y);
@@ -22,13 +22,9 @@ public class FajlNezegeto {
             fajl = new Ikon.megnyit(file, x, y);
         }
         
+        System.out.println(fajl);
         ablak.setLayout(null);
-        ablak.add(fajl, 0);
-    }
-
-    private void init() {
-    	ablak.setSize(600, 600);
-        ablak.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        ablak.add(fajl);
         ablak.setVisible(true);
     }
 }
