@@ -12,14 +12,14 @@ import java.io.IOException;
 public class FajlNezegeto {
     static JFrame ablak = new JFrame();
 
-    public FajlNezegeto(String file) {
+    public FajlNezegeto(String file, String kiterjesztes) {
         final int[] x = {600};
         final int[] y = {600};
 
         JPanel fajl = null;
-        if (file.contains(".jpg")) {
+        if (kiterjesztes.equals("jpg")) {
             fajl = new JPG(file, x[0], y[0]);
-        } else if (file.contains(".ico")) {
+        } else if (kiterjesztes.equals("ico")) {
             fajl = new Ikon.megnyit(file, x[0], y[0]);
         }
 
