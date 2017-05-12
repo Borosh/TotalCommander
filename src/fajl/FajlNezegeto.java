@@ -1,48 +1,34 @@
 package fajl;
 
 import fajl.kepFajlok.*;
-
+import fajl.szovegesFajlok.*;
 import javax.swing.*;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
-import java.awt.event.ComponentListener;
-import java.io.File;
-import java.io.IOException;
 
 public class FajlNezegeto {
-    static JFrame ablak = new JFrame();
+    private JFrame ablak = new JFrame();
+    private JPanel fajl = null;
+    private final int x = ablak.getContentPane().getWidth();
+    private final int y = ablak.getContentPane().getHeight();
 
     public FajlNezegeto(String file, String kiterjesztes) {
-        final int[] x = {600};
-        final int[] y = {600};
-
-        JPanel fajl = null;
-        if (kiterjesztes.equals("jpg")) {
-            fajl = new JPG(file, x[0], y[0]);
-        } else if (kiterjesztes.equals("ico")) {
-            fajl = new Ikon.megnyit(file, x[0], y[0]);
-        }
-
-        ablak.add(fajl);
-        ablak.addComponentListener(new ComponentAdapter() {
-            public void componentResized(ComponentEvent e) {
-                try {
-                    Thread.sleep(50);
-                } catch (InterruptedException e1) {
-                    e1.printStackTrace();
-                }
-                x[0] = ablak.getWidth();
-                y[0] = ablak.getHeight();
-                ablak.add(new JPG(file, x[0], y[0]));
-
-            }
-        });
+        
         init();
+        
+        if (kiterjesztes.equals("rtf")) {
+        	fajl = new Rtf(file, x, y);
+        }else if (kiterjesztes.equals("jpg")) {
+            fajl = new JPG(file, x, y);
+        }else if (kiterjesztes.equals("ico")) {
+            fajl = new Ikon.megnyit(file, x, y);
+        }
+        
+        ablak.setLayout(null);
+        ablak.add(fajl, 0);
     }
 
-    private static void init() {
+    private void init() {
+    	ablak.setSize(600, 600);
         ablak.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        ablak.setSize(ablak.getPreferredSize());
         ablak.setVisible(true);
     }
 }
