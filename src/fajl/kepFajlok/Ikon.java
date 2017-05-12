@@ -1,5 +1,6 @@
 package fajl.kepFajlok;
 
+import javax.swing.*;
 import java.io.File;
 
 /**
@@ -9,4 +10,9 @@ public class Ikon {
     public Ikon(File fajl) {
     }
 
+
+    public static class megnyit extends JPanel {
+        public megnyit(String file, int i, int i1) {
+        }
+    }
 }
