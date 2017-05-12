@@ -26,7 +26,6 @@ public class FajlNezegeto {
         }
 
         ablak.add(fajl);
-        ablak.setVisible(true);
         ablak.setResizable(false);
         ablak.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
