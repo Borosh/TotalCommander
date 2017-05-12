@@ -10,7 +10,7 @@ public class Rtf extends JPanel{
 
 	private static final long serialVersionUID = 1L;
 
-	public Rtf(File file){
+	public Rtf(String path){
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.gridx = 0;
 		gbc.gridy = 0;
@@ -30,7 +30,7 @@ public class Rtf extends JPanel{
 		JButton mentes = new JButton("Mentés");
 		
 		try{
-			rtf.read(new FileInputStream(file), szoveg.getDocument(), 0);
+			rtf.read(new FileInputStream(path), szoveg.getDocument(), 0);
 		}
 		catch(BadLocationException e){} 
 		catch (IOException e) {}
@@ -46,7 +46,7 @@ public class Rtf extends JPanel{
 		ablak.add(mentes, gbc);
 		mentes.addActionListener(e->{
 			try{
-				rtf.write(new FileOutputStream(file), szoveg.getDocument(), 0, szoveg.getDocument().getLength());
+				rtf.write(new FileOutputStream(path), szoveg.getDocument(), 0, szoveg.getDocument().getLength());
 			}
 			catch(BadLocationException e1){}
 			catch (IOException e2) {}
