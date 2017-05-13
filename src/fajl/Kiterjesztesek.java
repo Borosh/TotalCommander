@@ -48,7 +48,11 @@ public class Kiterjesztesek {
 	    	for(int i=0; i<darabok1.length-1; i++) {
 	    		str += darabok1[i] + ".";
 	    	}
-	    	str = str.substring(0, str.length()-1);
+	    	try {
+	    		str = str.substring(0, str.length()-1);
+	    	}
+	    	catch (StringIndexOutOfBoundsException e) {
+	    	}
 	    }
 	    return str;
 	}
