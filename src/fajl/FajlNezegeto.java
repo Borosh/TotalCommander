@@ -27,6 +27,7 @@ public class FajlNezegeto {
         	ablak.add(fajl);
         }catch(Exception e){
         	JOptionPane.showMessageDialog(ablak, "File megnyitás közbeni hiba!", "Hiba", JOptionPane.ERROR_MESSAGE);
+        	ablak.dispose();
         }
         ablak.setResizable(false);
         ablak.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
