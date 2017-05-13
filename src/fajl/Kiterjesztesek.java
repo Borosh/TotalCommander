@@ -13,7 +13,11 @@ public class Kiterjesztesek {
 		tamogatott.add("txt");
         tamogatott.add("rtf");
         tamogatott.add("jpg");
-        tamogatott.add("icon");
+        tamogatott.add("bmp");
+        tamogatott.add("gif");
+        tamogatott.add("png");
+        tamogatott.add("wbmp");
+        tamogatott.add("jpeg");
         tamogatott.add("<DIR>");
 	}
 	
