@@ -10,7 +10,11 @@ public class Rtf extends JPanel {
 
     private static final long serialVersionUID = 1L;
 
-    public Rtf(String path) {
+    public Rtf(String path, int x, int y) throws FileNotFoundException, IOException, BadLocationException {
+        
+        setBounds(0,0,x,y);
+        setLayout(new GridBagLayout());
+        
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 0;
@@ -23,37 +27,27 @@ public class Rtf extends JPanel {
         RTFEditorKit rtf = new RTFEditorKit();
         JTextArea szoveg = new JTextArea();
         szoveg.setDocument(rtf.createDefaultDocument());
-        szoveg.setMinimumSize(new Dimension(600, 600));
-        szoveg.setBorder(BorderFactory.createEtchedBorder());
-        szoveg.setMargin(new Insets(20, 20, 20, 20));
+        szoveg.setBounds(0,0,x-10, y-10);
+        szoveg.setMargin(new Insets(5,5,5,5));
 
-        JButton mentes = new JButton("Mentés");
-
-        try {
-            rtf.read(new FileInputStream(path), szoveg.getDocument(), 0);
-        } catch (BadLocationException e) {
-        } catch (IOException e) {
-        }
-
-        JFrame ablak = new JFrame();
-        ablak.setLayout(new GridBagLayout());
-        ablak.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        ablak.add(szoveg, gbc);
+        rtf.read(new FileInputStream(path), szoveg.getDocument(), 0);
+        JScrollPane csuszka = new JScrollPane (szoveg);
+        csuszka.setVerticalScrollBarPolicy ( ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED );
+        csuszka.setHorizontalScrollBarPolicy ( ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED );
+        add(csuszka, gbc);
 
         ++gbc.gridy;
         gbc.fill = GridBagConstraints.NONE;
         gbc.weighty = 0;
-        ablak.add(mentes, gbc);
-        mentes.addActionListener(e -> {
-            try {
-                rtf.write(new FileOutputStream(path), szoveg.getDocument(), 0, szoveg.getDocument().getLength());
-            } catch (BadLocationException e1) {
-            } catch (IOException e2) {
-            }
-        });
 
-        ablak.setLocation(600, 200);
-        ablak.setSize(ablak.getMinimumSize());
-        ablak.setVisible(true);
+        JButton mentes = new JButton("Mentés");
+        add(mentes, gbc);
+        mentes.addActionListener(e -> {
+        	try {
+				rtf.write(new FileOutputStream(path), szoveg.getDocument(), 0, szoveg.getDocument().getLength());
+			} catch (IOException | BadLocationException e1) {
+				JOptionPane.showMessageDialog(this, "File mentés közbeni hiba!", "Hiba", JOptionPane.ERROR_MESSAGE);
+			}
+        });
     }
 }
