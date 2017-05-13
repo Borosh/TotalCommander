@@ -9,7 +9,7 @@ public class FajlLista {
     private static int helyzet = 0;
     
 
-    public static void fajlLista(String direktorium) {
+    static void fajlLista(String direktorium) {
         file = new File(direktorium);
         lista = file.listFiles();
         try {
@@ -23,19 +23,19 @@ public class FajlLista {
         }
     }
     
-    public static Fajl[] getFajlLista() {
+    static Fajl[] getFajlLista() {
     	return fajl;
     }
     
-    public static int getHelyzet() {
+    static int getHelyzet() {
     	return helyzet;
     }
     
-    public static void setHelyzet(int ertek) {
+    static void setHelyzet(int ertek) {
     	helyzet = ertek;
     }
     
-    public static String aktualisHelyzet() {
+    static String aktualisHelyzet() {
     	String hely = lista[helyzet].getAbsolutePath();
     	String[] darabok = hely.split("\\\\");
     	String str = "";
@@ -44,5 +44,13 @@ public class FajlLista {
     	}
     	//System.out.println(str);
     	return str;
+    }
+    
+    static void frissit(String utvonal) {
+    	file = null;
+        lista = null;
+        fajl = null;
+        helyzet = 0;
+        fajlLista(utvonal);
     }
 }

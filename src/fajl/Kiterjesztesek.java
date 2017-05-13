@@ -4,12 +4,12 @@ import java.io.File;
 import java.util.ArrayList;
 
 public class Kiterjesztesek {
-	public static ArrayList<String> tamogatott = new ArrayList<String>();
+	static ArrayList<String> tamogatott = new ArrayList<String>();
 	private static String utvonal = "";
 	private static String[] darabok;
 	private static String str = "";
 	
-	public static void tamogatottTipusok() {
+	static void tamogatottTipusok() {
 		tamogatott.add("txt");
         tamogatott.add("rtf");
         tamogatott.add("jpg");
@@ -21,7 +21,7 @@ public class Kiterjesztesek {
         tamogatott.add("<DIR>");
 	}
 	
-	public static String kiterjesztes(File fajl) {		
+	static String kiterjesztes(File fajl) {		
 		if(fajl.isDirectory()) {
 			return "<DIR>";
 		}
@@ -38,7 +38,7 @@ public class Kiterjesztesek {
 		}
 	}
 	    
-	public static String nev(File fajl) {
+	static String nev(File fajl) {
 		String resz;
 		str = "";
 		utvonal = fajl.getAbsolutePath();
