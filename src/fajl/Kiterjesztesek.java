@@ -1,5 +1,6 @@
 package fajl;
 
+import javax.swing.*;
 import java.io.File;
 import java.util.ArrayList;
 
@@ -9,7 +10,7 @@ public class Kiterjesztesek {
     private static String[] darabok;
     private static String str = "";
 
-    public static void tamogatottTipusok() {
+    static void tamogatottTipusok() {
         tamogatott.add("txt");
         tamogatott.add("rtf");
         tamogatott.add("jpg");
@@ -36,7 +37,7 @@ public class Kiterjesztesek {
         }
     }
 
-    static String nev(File fajl) throws Exception {
+    static String nev(File fajl) {
         String resz;
         str = "";
         utvonal = fajl.getAbsolutePath();
@@ -49,8 +50,11 @@ public class Kiterjesztesek {
             for (int i = 0; i < darabok1.length - 1; i++) {
                 str += darabok1[i] + ".";
             }
-            str = str.substring(0, str.length() - 1);
-
+            try {
+                str = str.substring(0, str.length() - 1);
+            } catch (StringIndexOutOfBoundsException e) {
+                JOptionPane.showMessageDialog(null, "Hiba!", "Hiba", JOptionPane.ERROR_MESSAGE);
+            }
         }
         return str;
     }
