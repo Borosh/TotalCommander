@@ -7,14 +7,13 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-public class JPG extends JPanel {
-    public JPG(String fajl, int x, int y) {
+public class Kep extends JPanel {
+    public Kep(String fajl, int x, int y) {
         try {
             JLabel pictureLabel = new JLabel();
             File file = new File(fajl);
             BufferedImage img = ImageIO.read(file);
             Image scaledImg = img.getScaledInstance(x, y, Image.SCALE_DEFAULT);
-
             pictureLabel.setIcon(new ImageIcon(scaledImg));
             this.add(pictureLabel);
         } catch (IOException ex) {

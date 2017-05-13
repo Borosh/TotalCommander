@@ -1,8 +1,8 @@
 package fajl;
 
+import javax.swing.*;
 import java.io.File;
 import java.text.SimpleDateFormat;
-//import javax.swing.ImageIcon;
 
 public class Fajl {
     private String nev;
@@ -12,19 +12,22 @@ public class Fajl {
     //private ImageIcon ikon;
 
 
-    public void setFajl(String utvonal) {
+    void setFajl(String utvonal) {
         File fajl = new File(utvonal);
         Kiterjesztesek.tamogatottTipusok();
-        nev = Kiterjesztesek.nev(fajl);
-        kiterjesztes = Kiterjesztesek.kiterjesztes(fajl);
-        if(fajl.isDirectory()) {
-        	meret = "";
+        try {
+            nev = Kiterjesztesek.nev(fajl);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Hiba!", "Hiba", JOptionPane.ERROR_MESSAGE);
         }
-        else {
-        	meret = Long.toString(fajl.length());
+        kiterjesztes = Kiterjesztesek.kiterjesztes(fajl);
+        if (fajl.isDirectory()) {
+            meret = "";
+        } else {
+            meret = Long.toString(fajl.length());
         }
         datum = new SimpleDateFormat("MM/dd/yyyy HH:mm").format(fajl.lastModified());
- 
+
         //System.out.println(nev + "		" + kiterjesztes + "	" + meret + "	" + datum);
     }
 
