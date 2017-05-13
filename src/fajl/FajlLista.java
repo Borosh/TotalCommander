@@ -6,6 +6,8 @@ public class FajlLista {
     private File file;
     private File[] lista;
     private Fajl[] fajl;
+    private int helyzet = 0;
+    
 
     public FajlLista(String direktorium) {
         file = new File(direktorium);
@@ -23,5 +25,13 @@ public class FajlLista {
     
     public Fajl[] getFajlLista() {
     	return fajl;
+    }
+    
+    public int getHelyzet() {
+    	return helyzet;
+    }
+    
+    public void setHelyzet(int ertek) {
+    	helyzet = ertek;
     }
 }
