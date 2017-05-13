@@ -13,7 +13,11 @@ public class Kiterjesztesek {
 		tamogatott.add("txt");
         tamogatott.add("rtf");
         tamogatott.add("jpg");
-        tamogatott.add("icon");
+        tamogatott.add("bmp");
+        tamogatott.add("gif");
+        tamogatott.add("png");
+        tamogatott.add("wbmp");
+        tamogatott.add("jpeg");
         tamogatott.add("<DIR>");
 	}
 	
@@ -48,7 +52,11 @@ public class Kiterjesztesek {
 	    	for(int i=0; i<darabok1.length-1; i++) {
 	    		str += darabok1[i] + ".";
 	    	}
-	    	str = str.substring(0, str.length()-1);
+	    	try {
+	    		str = str.substring(0, str.length()-1);
+	    	}
+	    	catch (StringIndexOutOfBoundsException e) {
+	    	}
 	    }
 	    return str;
 	}

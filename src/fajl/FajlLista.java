@@ -3,13 +3,13 @@ package fajl;
 import java.io.File;
 
 public class FajlLista {
-    private File file;
-    private File[] lista;
-    private Fajl[] fajl;
-    private int helyzet = 0;
+    private static File file;
+    private static File[] lista;
+    private static Fajl[] fajl;
+    private static int helyzet = 0;
     
 
-    public FajlLista(String direktorium) {
+    public static void fajlLista(String direktorium) {
         file = new File(direktorium);
         lista = file.listFiles();
         try {
@@ -23,15 +23,26 @@ public class FajlLista {
         }
     }
     
-    public Fajl[] getFajlLista() {
+    public static Fajl[] getFajlLista() {
     	return fajl;
     }
     
-    public int getHelyzet() {
+    public static int getHelyzet() {
     	return helyzet;
     }
     
-    public void setHelyzet(int ertek) {
+    public static void setHelyzet(int ertek) {
     	helyzet = ertek;
+    }
+    
+    public static String aktualisHelyzet() {
+    	String hely = lista[helyzet].getAbsolutePath();
+    	String[] darabok = hely.split("\\\\");
+    	String str = "";
+    	for(int i=0; i<darabok.length-1; i++) {
+    		str += darabok[i] + "\\\\";
+    	}
+    	//System.out.println(str);
+    	return str;
     }
 }
