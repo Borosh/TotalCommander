@@ -5,8 +5,6 @@ import fajl.szovegesFajlok.*;
 
 import javax.swing.*;
 
-import static fajl.Kiterjesztesek.tamogatott;
-
 public class FajlNezegeto {
 
     public FajlNezegeto(String file, String kiterjesztes) {
@@ -17,14 +15,12 @@ public class FajlNezegeto {
         int x = ablak.getContentPane().getWidth();
         int y = ablak.getContentPane().getHeight();
 
-        System.out.println(tamogatott);
-
         try {
             if (kiterjesztes.equals("rtf")) {
                 fajl = new Rtf(file, x, y);
             } else if (kiterjesztes.equals("txt")) {
                 fajl = new Txt(file, x, y);
-            } else if (tamogatott.contains(kiterjesztes) && !kiterjesztes.equals("<DIR>")) {
+            } else if (FajlAdatok.tamogatott.contains(kiterjesztes)) {
                 fajl = new Kep(file, x, y);
             } else {
                 throw new Exception();

@@ -3,7 +3,6 @@ package fajl;
 import java.io.File;
 import java.io.PrintStream;
 import java.text.SimpleDateFormat;
-//import javax.swing.ImageIcon;
 import java.util.ArrayList;
 
 public class FajlAdatok {
@@ -11,6 +10,7 @@ public class FajlAdatok {
 
     public static ArrayList<String> tamogatott = new ArrayList<String>() {
         private static final long serialVersionUID = 1L;
+
         {
             add("txt");
             add("rtf");

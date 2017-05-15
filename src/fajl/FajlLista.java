@@ -8,7 +8,7 @@ public class FajlLista {
 
     public ArrayList<File> lista = new ArrayList<>();
     File os = null;
-    File helyzet = null;
+    public File helyzet = null;
 
     public FajlLista(File helyzet) {
         frissit(helyzet);
