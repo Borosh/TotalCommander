@@ -8,41 +8,45 @@ public class FajlLista {
     private static Fajl[] fajl;
     private static int helyzet = 0;
     
+	public ArrayList<File> lista = new ArrayList<>();
+	File os = null;
+	public File helyzet = null;
+	int aktualisFajl;
 
-    public static void fajlLista(String direktorium) {
-        file = new File(direktorium);
-        lista = file.listFiles();
-        try {
-        	fajl = new Fajl[lista.length];
-        	for (int i = 0; i < lista.length; i++) {
-        		fajl[i] = new Fajl();
-        		fajl[i].setFajl(lista[i].getAbsolutePath());
-        	}
+	public FajlLista(File helyzet) {
+		frissit(helyzet);
+		aktualisFajl = 0;
+	}
+	
+    public void lefele() {
+        if (aktualisFajl + 1 < lista.size()) {
+        	aktualisFajl++;
+        } else {
+        	aktualisFajl = 0;
         }
-        catch(NullPointerException e) {
+    }
+
+    public void felfele() {
+        if (aktualisFajl - 1 >= 0) {
+        	aktualisFajl--;
+        } else {
+        	aktualisFajl = lista.size() - 1;
         }
     }
-    
-    public static Fajl[] getFajlLista() {
-    	return fajl;
-    }
-    
-    public static int getHelyzet() {
-    	return helyzet;
-    }
-    
-    public static void setHelyzet(int ertek) {
-    	helyzet = ertek;
-    }
-    
-    public static String aktualisHelyzet() {
-    	String hely = lista[helyzet].getAbsolutePath();
-    	String[] darabok = hely.split("\\\\");
-    	String str = "";
-    	for(int i=0; i<darabok.length-1; i++) {
-    		str += darabok[i] + "\\\\";
-    	}
-    	//System.out.println(str);
-    	return str;
-    }
+
+	public void frissit(File helyzet) {
+		lista = new ArrayList<>();
+		this.helyzet = helyzet;
+		if (helyzet.getParentFile() != null) {
+			os = helyzet.getParentFile();
+			lista.add(os);
+		} else {
+			os = null;
+		}
+		try {
+			Collections.addAll(lista, helyzet.listFiles());
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "Hiba megnyitás közben!", "Hiba", JOptionPane.ERROR_MESSAGE);
+		}
+	}
 }
