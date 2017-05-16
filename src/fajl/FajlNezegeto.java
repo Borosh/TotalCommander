@@ -2,7 +2,6 @@ package fajl;
 
 import fajl.kepFajlok.*;
 import fajl.szovegesFajlok.*;
-
 import java.io.File;
 
 import javax.swing.*;
@@ -29,7 +28,7 @@ public class FajlNezegeto {
             }
             ablak.add(fajl);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(ablak, "Hiba megnyitás közben!", "Hiba", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(ablak, "Hiba megnyitÃ¡s kÃ¶zben!", "Hiba", JOptionPane.ERROR_MESSAGE);
         }
         ablak.setResizable(false);
         ablak.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);

@@ -1,3 +1,12 @@
+import fajl.FajlAdatok;
+import fajl.FajlLista;
+import fajl.Operaciok;
+import navigacio.Navigacio;
+
+import javax.swing.*;
+import java.io.File;
+import java.nio.file.Paths;
+
 public class Main {
 	private static FajlLista balLista = new FajlLista(new File("D:\\"));
 

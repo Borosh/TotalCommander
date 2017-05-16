@@ -1,12 +1,10 @@
 package fajl;
 
-import java.io.File;
+import javax.swing.*;
+import java.util.*;
+import java.io.*;
 
 public class FajlLista {
-    private static File file;
-    private static File[] lista;
-    private static Fajl[] fajl;
-    private static int helyzet = 0;
     
 	public ArrayList<File> lista = new ArrayList<>();
 	File os = null;
