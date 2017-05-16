@@ -8,7 +8,9 @@ import java.io.File;
 import java.io.IOException;
 
 public class Kep extends JPanel {
-    public Kep(String fajl, int x, int y) {
+	private static final long serialVersionUID = 1L;
+
+	public Kep(String fajl, int x, int y) {
         try {
             JLabel pictureLabel = new JLabel();
             File file = new File(fajl);
