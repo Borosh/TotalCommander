@@ -2,12 +2,14 @@ package fajl;
 
 import fajl.kepFajlok.*;
 import fajl.szovegesFajlok.*;
+import java.io.File;
 
 import javax.swing.*;
 
 public class FajlNezegeto {
 
-    public FajlNezegeto(String file, String kiterjesztes) {
+    public FajlNezegeto(String file) {
+    	String kiterjesztes = FajlAdatok.getKiterjesztes(new File(file));
         JFrame ablak = new JFrame(file);
         JPanel fajl = null;
         ablak.setBounds(200, 50, 600, 600);

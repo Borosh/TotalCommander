@@ -8,25 +8,23 @@ import java.io.File;
 import java.nio.file.Paths;
 
 public class Main {
+	private static FajlLista balLista = new FajlLista(new File("D:\\"));
 
-    private static FajlLista balLista = new FajlLista(new File("C:\\"));
+	public static void main(String[] args) throws Exception {
+		Navigacio.belelep(new File("D:\\Gitar iskola"), balLista);
+		for (File i : balLista.lista) {
+			FajlAdatok.getAdatok(i, balLista);
+		}
 
-    public static void main(String[] args) throws Exception {
-        Navigacio.belelep(new File("C:\\Users"), balLista);
-        Navigacio.belelep(new File("C:\\Users\\Boros"), balLista);
-        Navigacio.belelep(new File("C:\\Users\\Boros\\Downloads"), balLista);
-        for (File i : balLista.lista) {
-            FajlAdatok.getAdatok(i, balLista);
-        }
-
-        try {
-            Operaciok.ujMappa(Paths.get(balLista.helyzet.getAbsolutePath() + "\\mappa1"));
-            Operaciok.ujMappa(Paths.get(balLista.helyzet.getAbsolutePath() + "\\mappa2"));
-            Operaciok.torol(Paths.get(balLista.helyzet.getAbsolutePath() + "\\mappa1"));
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage(), "Hiba", JOptionPane.ERROR_MESSAGE);
-
-        }
-
-    }
+		try {
+			Operaciok.ujMappa(Paths.get(balLista.helyzet.getAbsolutePath() + "\\mappa1"));
+			Navigacio.belelep(new File("D:\\Gitar iskola\\mappa1"), balLista);
+			Operaciok.ujMappa(Paths.get(balLista.helyzet.getAbsolutePath() + "\\mappa2"));
+			Navigacio.belelep(new File("D:\\Gitar iskola"), balLista);
+			Operaciok.torol(Paths.get(balLista.helyzet.getAbsolutePath() + "\\mappa1"));
+			Navigacio.interakcio(new File("D:\\Gitar iskola\\valami.valami.txt"), balLista);
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, e.getMessage(), "Hiba", JOptionPane.ERROR_MESSAGE);
+		}
+	}
 }
