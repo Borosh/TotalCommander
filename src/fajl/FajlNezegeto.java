@@ -14,7 +14,6 @@ public class FajlNezegeto {
         ablak.setVisible(true);
         int x = ablak.getContentPane().getWidth();
         int y = ablak.getContentPane().getHeight();
-
         try {
             if (kiterjesztes.equals("rtf")) {
                 fajl = new Rtf(file, x, y);
@@ -29,7 +28,6 @@ public class FajlNezegeto {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(ablak, "Hiba megnyitás közben!", "Hiba", JOptionPane.ERROR_MESSAGE);
         }
-
         ablak.setResizable(false);
         ablak.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
