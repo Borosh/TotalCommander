@@ -1,24 +1,31 @@
+package GUI;
+
+import fajl.FajlNezegeto;
+import fajl.Operaciok;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
+import java.awt.image.ImageObserver;
+import java.nio.file.Paths;
 
 /**
  * Created by FANNI on 2017.05.16..
  */
-public class LabLec extends JPanel {
+class LabLec extends JPanel {
 
-    public static JButton F3 = new JButton("F3 Nézőke");
-    public static JButton F5 = new JButton("F5 Másolás ");
-    public static JButton F6 = new JButton("F6 Áthelyez");
-    public static JButton F7 = new JButton("F7 Új mappa");
-    public static JButton F8 = new JButton("F8 Törlés");
-    public static JButton TAB = new JButton("TAB");
+    static JButton F3 = new JButton("F3 Nézőke");
+    static JButton F5 = new JButton("F5 Másolás ");
+    static JButton F6 = new JButton("F6 Áthelyez");
+    static JButton F7 = new JButton("F7 Új mappa");
+    static JButton F8 = new JButton("F8 Törlés");
+    static JButton TAB = new JButton("TAB");
     private JPanel labLec = new JPanel();
 
 
-    public LabLec() {
+    LabLec() {
         setLayout(new GridLayout(1, 5));
         setMinimumSize(new Dimension(400, 50));
         add(F3);
@@ -31,28 +38,40 @@ public class LabLec extends JPanel {
         F3.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new FajlNezegeto(Main.ablak.fokuszbanVan.fajlLista.helyzet);
+                new FajlNezegeto(Ablak.fokuszbanVan.helyzet.getAbsolutePath());
             }
         });
         F5.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Operaciok.masol(Main.ablak.fokuszbanVan.fajlLista.aktualisFajl, Main.ablak.nincsFokuszban.helyzet);
+                try {
+                    Operaciok.masol(Paths.get(Ablak.fokuszbanVan.lista.get(Ablak.fokuszbanVan.aktualisFajl).getAbsolutePath()), Paths.get(Ablak.nincsFokuszban.helyzet.getAbsolutePath()));
+                } catch (Exception e1) {
+                    JOptionPane.showMessageDialog(null, "File másolása közbeni hiba!", "Hiba", JOptionPane.ERROR_MESSAGE);
+                }
             }
         });
         F6.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Operaciok.athelyez(Main.ablak.fokuszbanVan.fajlLista.aktualisFajl, Main.ablak.nincsFokuszban.helyzet);
+                try {
+                    Operaciok.athelyez(Paths.get(Ablak.fokuszbanVan.lista.get(Ablak.fokuszbanVan.aktualisFajl).getAbsolutePath()), Paths.get(Ablak.nincsFokuszban.helyzet.getAbsolutePath()));
+                } catch (Exception e1) {
+                    JOptionPane.showMessageDialog(null, "File áthelyez közbeni hiba!", "Hiba", JOptionPane.ERROR_MESSAGE);
+                }
 
             }
         });
         F8.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Operaciok.torol(Main.ablak.fokuszbanVan.fajlLista.aktualisFajl);
+                try {
+                    Operaciok.torol(Paths.get(Ablak.fokuszbanVan.lista.get(Ablak.fokuszbanVan.aktualisFajl).getAbsolutePath()));
+                } catch (Exception e1) {
+                    JOptionPane.showMessageDialog(null, "File törlés közbeni hiba!", "Hiba", JOptionPane.ERROR_MESSAGE);
+                }
             }
-        })
+        });
         F7.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -67,12 +86,13 @@ public class LabLec extends JPanel {
                 frameUjMappa.add(mappaNev);
                 frameUjMappa.add(ok);
                 frameUjMappa.setVisible(true);
-                ok.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        nev[0] = mappaNev.getText();
-                        frameUjMappa.dispatchEvent(new WindowEvent(frameUjMappa, WindowEvent.WINDOW_CLOSING));
-                        Operaciok.ujMappa(Main.ablak.fokuszbanVan.fajlLista.helyzet.getAbsolutePath() + "\\" + nev[0]);
+                ok.addActionListener(lambda -> {
+                    nev[0] = mappaNev.getText();
+                    frameUjMappa.dispatchEvent(new WindowEvent(frameUjMappa, WindowEvent.WINDOW_CLOSING));
+                    try {
+                        Operaciok.ujMappa(Paths.get(Ablak.fokuszbanVan.helyzet.getAbsolutePath() + "\\" + nev[0]));
+                    } catch (Exception e1) {
+                        JOptionPane.showMessageDialog(null, "Új mappa létrhezása közbeni hiba!", "Hiba", JOptionPane.ERROR_MESSAGE);
                     }
                 });
 
@@ -82,10 +102,9 @@ public class LabLec extends JPanel {
         TAB.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Main.ablak.fokuszValtas();
+                Ablak.fokuszValtas();
             }
         });
-
     }
 
 }

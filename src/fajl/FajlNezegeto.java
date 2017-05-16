@@ -2,6 +2,8 @@ package fajl;
 
 import fajl.kepFajlok.*;
 import fajl.szovegesFajlok.*;
+
+import java.awt.event.WindowEvent;
 import java.io.File;
 
 import javax.swing.*;
@@ -9,7 +11,7 @@ import javax.swing.*;
 public class FajlNezegeto {
 
     public FajlNezegeto(String file) {
-    	String kiterjesztes = FajlAdatok.getKiterjesztes(new File(file));
+        String kiterjesztes = FajlAdatok.getKiterjesztes(new File(file));
         JFrame ablak = new JFrame(file);
         JPanel fajl = null;
         ablak.setBounds(200, 50, 600, 600);
@@ -29,6 +31,7 @@ public class FajlNezegeto {
             ablak.add(fajl);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(ablak, "Hiba megnyitás közben!", "Hiba", JOptionPane.ERROR_MESSAGE);
+            ablak.dispatchEvent(new WindowEvent(ablak, WindowEvent.WINDOW_CLOSING));
         }
         ablak.setResizable(false);
         ablak.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
