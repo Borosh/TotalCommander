@@ -30,7 +30,7 @@ public class LabLec extends JPanel {
 		add(F6);
 		add(F7);
 		add(F8);
-		
+
 		F3.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
@@ -38,6 +38,8 @@ public class LabLec extends JPanel {
 						(Ablak.fokuszbanVan.fajlLista.lista.get(Ablak.fokuszbanVan.lista.get(0).getSelectedIndex())));
 				Ablak.fokuszbanVan.fajlLista.frissit(Ablak.fokuszbanVan.fajlLista.helyzet);
 				Ablak.nincsFokuszban.fajlLista.frissit(Ablak.nincsFokuszban.fajlLista.helyzet);
+
+				Ablak.fokuszbanVan.fajlok.transferFocus();
 			}
 
 		});
@@ -51,6 +53,8 @@ public class LabLec extends JPanel {
 							Paths.get(Ablak.nincsFokuszban.fajlLista.helyzet.getAbsolutePath()));
 					Ablak.fokuszbanVan.fajlLista.frissit(Ablak.fokuszbanVan.fajlLista.helyzet);
 					Ablak.nincsFokuszban.fajlLista.frissit(Ablak.nincsFokuszban.fajlLista.helyzet);
+
+					Ablak.fokuszbanVan.fajlok.transferFocus();
 				} catch (Exception e1) {
 					JOptionPane.showMessageDialog(null, "File másolása közbeni hiba!", "Hiba",
 							JOptionPane.ERROR_MESSAGE);
@@ -67,6 +71,8 @@ public class LabLec extends JPanel {
 							Paths.get(Ablak.nincsFokuszban.fajlLista.helyzet.getAbsolutePath()));
 					Ablak.fokuszbanVan.fajlLista.frissit(Ablak.fokuszbanVan.fajlLista.helyzet);
 					Ablak.nincsFokuszban.fajlLista.frissit(Ablak.nincsFokuszban.fajlLista.helyzet);
+
+					Ablak.fokuszbanVan.fajlok.transferFocus();
 				} catch (Exception e1) {
 					JOptionPane.showMessageDialog(null, "File áthelyez közbeni hiba!", "Hiba",
 							JOptionPane.ERROR_MESSAGE);
@@ -82,6 +88,8 @@ public class LabLec extends JPanel {
 							.get(Ablak.fokuszbanVan.lista.get(0).getSelectedIndex()).getAbsolutePath()));
 					Ablak.fokuszbanVan.fajlLista.frissit(Ablak.fokuszbanVan.fajlLista.helyzet);
 					Ablak.nincsFokuszban.fajlLista.frissit(Ablak.nincsFokuszban.fajlLista.helyzet);
+
+					Ablak.fokuszbanVan.fajlok.transferFocus();
 				} catch (Exception e1) {
 					JOptionPane.showMessageDialog(null, "File törlés közbeni hiba!", "Hiba", JOptionPane.ERROR_MESSAGE);
 				}
@@ -109,6 +117,8 @@ public class LabLec extends JPanel {
 								Paths.get(Ablak.fokuszbanVan.fajlLista.helyzet.getAbsolutePath() + "\\" + nev[0]));
 						Ablak.fokuszbanVan.fajlLista.frissit(Ablak.fokuszbanVan.fajlLista.helyzet);
 						Ablak.nincsFokuszban.fajlLista.frissit(Ablak.nincsFokuszban.fajlLista.helyzet);
+
+						Ablak.fokuszbanVan.fajlok.transferFocus();
 					} catch (Exception e1) {
 						JOptionPane.showMessageDialog(null, "Új mappa létrhezása közbeni hiba!", "Hiba",
 								JOptionPane.ERROR_MESSAGE);
@@ -123,7 +133,9 @@ public class LabLec extends JPanel {
 				Ablak.fokuszValtas();
 				Ablak.fokuszbanVan.fajlLista.frissit(Ablak.fokuszbanVan.fajlLista.helyzet);
 				Ablak.nincsFokuszban.fajlLista.frissit(Ablak.nincsFokuszban.fajlLista.helyzet);
-				for(JList<String> i: Ablak.fokuszbanVan.lista)
+
+				Ablak.fokuszbanVan.fajlok.transferFocus();
+				for (JList<String> i : Ablak.fokuszbanVan.lista)
 					i.setSelectedIndex(0);
 			}
 		});

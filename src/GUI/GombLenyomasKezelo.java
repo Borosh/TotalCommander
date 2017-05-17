@@ -19,11 +19,13 @@ import navigacio.Navigacio;
 public class GombLenyomasKezelo implements KeyListener {
 
 	public void keyReleased(KeyEvent e) {
-		if (e.getKeyCode() == KeyEvent.VK_F3) {
+		if (e.getKeyCode() == KeyEvent.VK_F3 || e.getKeyCode() == KeyEvent.VK_ENTER) {
 			Navigacio.interakcio(
 					(Ablak.fokuszbanVan.fajlLista.lista.get(Ablak.fokuszbanVan.lista.get(0).getSelectedIndex())));
 			Ablak.fokuszbanVan.fajlLista.frissit(Ablak.fokuszbanVan.fajlLista.helyzet);
 			Ablak.nincsFokuszban.fajlLista.frissit(Ablak.nincsFokuszban.fajlLista.helyzet);
+
+			Ablak.fokuszbanVan.fajlok.transferFocus();
 		} else if (e.getKeyCode() == KeyEvent.VK_F5) {
 			try {
 				Operaciok.masol(
@@ -32,6 +34,8 @@ public class GombLenyomasKezelo implements KeyListener {
 						Paths.get(Ablak.nincsFokuszban.fajlLista.helyzet.getAbsolutePath()));
 				Ablak.fokuszbanVan.fajlLista.frissit(Ablak.fokuszbanVan.fajlLista.helyzet);
 				Ablak.nincsFokuszban.fajlLista.frissit(Ablak.nincsFokuszban.fajlLista.helyzet);
+
+				Ablak.fokuszbanVan.fajlok.transferFocus();
 			} catch (Exception e1) {
 				JOptionPane.showMessageDialog(null, "File másolása közbeni hiba!", "Hiba", JOptionPane.ERROR_MESSAGE);
 			}
@@ -43,6 +47,8 @@ public class GombLenyomasKezelo implements KeyListener {
 						Paths.get(Ablak.nincsFokuszban.fajlLista.helyzet.getAbsolutePath()));
 				Ablak.fokuszbanVan.fajlLista.frissit(Ablak.fokuszbanVan.fajlLista.helyzet);
 				Ablak.nincsFokuszban.fajlLista.frissit(Ablak.nincsFokuszban.fajlLista.helyzet);
+
+				Ablak.fokuszbanVan.fajlok.transferFocus();
 			} catch (Exception e1) {
 				JOptionPane.showMessageDialog(null, "File áthelyez közbeni hiba!", "Hiba", JOptionPane.ERROR_MESSAGE);
 			}
@@ -66,28 +72,31 @@ public class GombLenyomasKezelo implements KeyListener {
 							.ujMappa(Paths.get(Ablak.fokuszbanVan.fajlLista.helyzet.getAbsolutePath() + "\\" + nev[0]));
 					Ablak.fokuszbanVan.fajlLista.frissit(Ablak.fokuszbanVan.fajlLista.helyzet);
 					Ablak.nincsFokuszban.fajlLista.frissit(Ablak.nincsFokuszban.fajlLista.helyzet);
+
+					Ablak.fokuszbanVan.fajlok.transferFocus();
 				} catch (Exception e1) {
 					JOptionPane.showMessageDialog(null, "Új mappa létrhezása közbeni hiba!", "Hiba",
 							JOptionPane.ERROR_MESSAGE);
 				}
 			});
-		} else if (e.getKeyCode() == KeyEvent.VK_F8) {
+		} else if (e.getKeyCode() == KeyEvent.VK_F8 || e.getKeyCode() == KeyEvent.VK_DELETE) {
 			try {
 				Operaciok.torol(Paths.get(Ablak.fokuszbanVan.fajlLista.lista
 						.get(Ablak.fokuszbanVan.lista.get(0).getSelectedIndex()).getAbsolutePath()));
 				Ablak.fokuszbanVan.fajlLista.frissit(Ablak.fokuszbanVan.fajlLista.helyzet);
 				Ablak.nincsFokuszban.fajlLista.frissit(Ablak.nincsFokuszban.fajlLista.helyzet);
+
+				Ablak.fokuszbanVan.fajlok.transferFocus();
 			} catch (Exception e1) {
 				JOptionPane.showMessageDialog(null, "File törlés közbeni hiba!", "Hiba", JOptionPane.ERROR_MESSAGE);
 			}
 		} else if (e.getKeyCode() == KeyEvent.VK_F1) {
 			Ablak.fokuszValtas();
-			System.out.println("br");
 			Ablak.fokuszbanVan.fajlLista.frissit(Ablak.fokuszbanVan.fajlLista.helyzet);
 			Ablak.nincsFokuszban.fajlLista.frissit(Ablak.nincsFokuszban.fajlLista.helyzet);
 			for(JList<String> i: Ablak.fokuszbanVan.lista)
 				i.setSelectedIndex(0);
-
+			Ablak.fokuszbanVan.fajlok.transferFocus();
 		}
 	}
 
