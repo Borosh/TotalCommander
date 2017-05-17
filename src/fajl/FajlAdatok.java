@@ -22,7 +22,7 @@ public class FajlAdatok {
         }
     };
 
-    public static String getNev(File fajl, FajlLista lista) {
+    public static String getNev(File fajl) {
         if (fajl.isDirectory()) {
             return fajl.getName();
         } else
@@ -57,7 +57,7 @@ public class FajlAdatok {
         if (lista.os == fajl) {
             return System.out.printf("..\n");
         }
-        return System.out.printf("%-50s%-25s%-25s%-25s\n", getNev(fajl, lista), getKiterjesztes(fajl), getMeret(fajl),
+        return System.out.printf("%-50s%-25s%-25s%-25s\n", getNev(fajl), getKiterjesztes(fajl), getMeret(fajl),
                 getDatum(fajl));
     }
 }

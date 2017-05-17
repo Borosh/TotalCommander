@@ -1,9 +1,7 @@
-import GUI.Ablak;
-import fajl.FajlAdatok;
-import fajl.FajlLista;
+import fajl.*;
 import navigacio.Navigacio;
-
 import javax.swing.*;
+import GUI.*;
 import java.io.File;
 
 public class Main {
@@ -21,5 +19,6 @@ public class Main {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Hiba", JOptionPane.ERROR_MESSAGE);
         }
+
     }
 }
