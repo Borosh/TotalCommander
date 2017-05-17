@@ -32,6 +32,12 @@ public class NavigaloPanel {
 			if (!FileSystemView.getFileSystemView().getSystemDisplayName(j).equals(""))
 				particio.addItem(FileSystemView.getFileSystemView().getSystemDisplayName(j));
 		aktualisMappa.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 0));
+
+		particio.addActionListener(e -> {
+			Navigacio.interakcio(File.listRoots()[particio.getSelectedIndex()]);
+			Ablak.fokuszbanVan.fajlLista.frissit(Ablak.fokuszbanVan.fajlLista.helyzet);
+			Ablak.nincsFokuszban.fajlLista.frissit(Ablak.nincsFokuszban.fajlLista.helyzet);
+		});
 		fejLec.add(particio);
 		fejLec.add(aktualisMappa);
 
@@ -47,7 +53,8 @@ public class NavigaloPanel {
 
 		for (int i = 0; i < 4; ++i) {
 			lista.get(i).setFixedCellHeight(20);
-			lista.get(i).addMouseListener(this.new EgerKezelo());
+			lista.get(i).addMouseListener(this.new AkcioKezelo());
+			lista.get(i).addKeyListener(new GombLenyomasKezelo());
 			fajlok.add(lista.get(i));
 		}
 
@@ -55,6 +62,25 @@ public class NavigaloPanel {
 
 	public NavigaloPanel getOuter() {
 		return this;
+	}
+
+	public void novelo(JList<String> kimarad) {
+		
+		for (JList<String> i : lista) {
+			if (!i.equals(kimarad))
+				i.setSelectedIndex(i.getSelectedIndex() + 1);
+		}
+		
+	}
+
+	public void csokkento(JList<String> kimarad) {
+		
+		for (JList<String> i : lista) {
+			if (!i.equals(kimarad)) {
+				i.setSelectedIndex(i.getSelectedIndex() - 1);
+			}
+
+		}
 	}
 
 	public void frissit() {
@@ -80,9 +106,9 @@ public class NavigaloPanel {
 		aktualisMappa.setText(fajlLista.helyzet.getAbsolutePath());
 	}
 
-	class EgerKezelo implements MouseListener {
+	class AkcioKezelo implements MouseListener {
 
-		public EgerKezelo() {
+		public AkcioKezelo() {
 		}
 
 		public void mouseClicked(MouseEvent e) {
@@ -116,6 +142,7 @@ public class NavigaloPanel {
 
 		public void mouseReleased(MouseEvent e) {
 		}
+
 	}
 
 }
