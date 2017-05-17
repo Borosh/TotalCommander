@@ -34,6 +34,6 @@ public class FajlNezegeto {
             ablak.dispatchEvent(new WindowEvent(ablak, WindowEvent.WINDOW_CLOSING));
         }
         ablak.setResizable(false);
-        ablak.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        ablak.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
     }
 }

@@ -7,24 +7,26 @@ import fajl.*;
 
 public class Ablak extends JFrame{
 	
-	public static FajlLista fokuszbanVan;
-	public static FajlLista nincsFokuszban;
+	public static NavigaloPanel fokuszbanVan;
+	public static NavigaloPanel nincsFokuszban;
 	private NavigaloPanel balPanel = new NavigaloPanel();
 	private NavigaloPanel jobbPanel = new NavigaloPanel();
 	private LabLec also = new LabLec();
-	private FejLec felso = new FejLec();
 	private JPanel kozepso = new JPanel(new GridLayout(1, 2));
 	private JPanel foAblak = new JPanel(new BorderLayout());
+	private JPanel fejLecek = new JPanel(new GridLayout(1, 2));
 	
 	public Ablak(String nev){
 		setTitle(nev);
 		setLayout(new BorderLayout());
 		setBounds(500, 200, 850, 750);
-		fokuszbanVan = balPanel.fajlLista;
-		nincsFokuszban = jobbPanel.fajlLista;
-		foAblak.add(felso, BorderLayout.PAGE_START);
-		kozepso.add(new JScrollPane(balPanel));
-		kozepso.add(new JScrollPane(jobbPanel));
+		fokuszbanVan = balPanel;
+		nincsFokuszban = jobbPanel;
+		fejLecek.add(balPanel.fejLec);
+		fejLecek.add(jobbPanel.fejLec);
+		kozepso.add(new JScrollPane(balPanel.fajlok));
+		kozepso.add(new JScrollPane(jobbPanel.fajlok));
+		foAblak.add(fejLecek, BorderLayout.NORTH);
 		foAblak.add(kozepso, BorderLayout.CENTER);
 		foAblak.add(also, BorderLayout.PAGE_END);
 		add(foAblak,BorderLayout.CENTER);
@@ -33,7 +35,9 @@ public class Ablak extends JFrame{
 	}
 	
 	public static void fokuszValtas(){
-		
+		NavigaloPanel temp = fokuszbanVan;
+		fokuszbanVan = nincsFokuszban;
+		nincsFokuszban = temp;
 	}
 
 }
