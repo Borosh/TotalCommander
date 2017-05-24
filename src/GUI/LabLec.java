@@ -51,6 +51,7 @@ class LabLec extends JPanel {
 
 		F5.addActionListener(e -> {
 			try {
+				if( !Ablak.fokuszbanVan.fajlLista.lista.get(Ablak.fokuszbanVan.lista.get(0).getSelectedIndex()).equals(Ablak.fokuszbanVan.fajlLista.helyzet.getParentFile()) ){
 				Operaciok.masol(
 						Paths.get(Ablak.fokuszbanVan.fajlLista.lista
 								.get(Ablak.fokuszbanVan.lista.get(0).getSelectedIndex()).getAbsolutePath()),
@@ -59,6 +60,7 @@ class LabLec extends JPanel {
 				Ablak.nincsFokuszban.fajlLista.frissit(Ablak.nincsFokuszban.fajlLista.helyzet);
 
 				Ablak.fokuszbanVan.fajlok.transferFocus();
+				}
 			} catch (Exception e1) {
 				JOptionPane.showMessageDialog(null, e1.getMessage(), "Hiba", JOptionPane.ERROR_MESSAGE);
 			}
@@ -66,14 +68,17 @@ class LabLec extends JPanel {
 
 		F6.addActionListener(e -> {
 			try {
-				Operaciok.athelyez(
-						Paths.get(Ablak.fokuszbanVan.fajlLista.lista
-								.get(Ablak.fokuszbanVan.lista.get(0).getSelectedIndex()).getAbsolutePath()),
-						Paths.get(Ablak.nincsFokuszban.fajlLista.helyzet.getAbsolutePath()));
-				Ablak.fokuszbanVan.fajlLista.frissit(Ablak.fokuszbanVan.fajlLista.helyzet);
-				Ablak.nincsFokuszban.fajlLista.frissit(Ablak.nincsFokuszban.fajlLista.helyzet);
+				if (!Ablak.fokuszbanVan.fajlLista.lista.get(Ablak.fokuszbanVan.lista.get(0).getSelectedIndex())
+						.equals(Ablak.fokuszbanVan.fajlLista.helyzet.getParentFile())) {
+					Operaciok.athelyez(
+							Paths.get(Ablak.fokuszbanVan.fajlLista.lista
+									.get(Ablak.fokuszbanVan.lista.get(0).getSelectedIndex()).getAbsolutePath()),
+							Paths.get(Ablak.nincsFokuszban.fajlLista.helyzet.getAbsolutePath()));
+					Ablak.fokuszbanVan.fajlLista.frissit(Ablak.fokuszbanVan.fajlLista.helyzet);
+					Ablak.nincsFokuszban.fajlLista.frissit(Ablak.nincsFokuszban.fajlLista.helyzet);
 
-				Ablak.fokuszbanVan.fajlok.transferFocus();
+					Ablak.fokuszbanVan.fajlok.transferFocus();
+				}
 			} catch (Exception e1) {
 				JOptionPane.showMessageDialog(null, e1.getMessage(), "Hiba", JOptionPane.ERROR_MESSAGE);
 			}
@@ -96,12 +101,15 @@ class LabLec extends JPanel {
 
 		F8.addActionListener(e -> {
 			try {
-				int hibaUzenet = JOptionPane.showConfirmDialog(null,
-						"Biztos ki szeretné törölni a \""
-								+ Ablak.fokuszbanVan.fajlLista.lista
-										.get(Ablak.fokuszbanVan.lista.get(0).getSelectedIndex()).getName()
-								+ "\" nevű elemet?",
-						"Törlés", JOptionPane.YES_NO_OPTION);
+				int hibaUzenet = -1;
+				if (!Ablak.fokuszbanVan.fajlLista.lista.get(Ablak.fokuszbanVan.lista.get(0).getSelectedIndex())
+						.equals(Ablak.fokuszbanVan.fajlLista.helyzet.getParentFile()))
+					hibaUzenet = JOptionPane.showConfirmDialog(null,
+							"Biztos ki szeretné törölni a \""
+									+ Ablak.fokuszbanVan.fajlLista.lista
+											.get(Ablak.fokuszbanVan.lista.get(0).getSelectedIndex()).getName()
+									+ "\" nevű elemet?",
+							"Törlés", JOptionPane.YES_NO_OPTION);
 				if (hibaUzenet == JOptionPane.YES_OPTION) {
 					Operaciok.torol(Paths.get(Ablak.fokuszbanVan.fajlLista.lista
 							.get(Ablak.fokuszbanVan.lista.get(0).getSelectedIndex()).getAbsolutePath()));
