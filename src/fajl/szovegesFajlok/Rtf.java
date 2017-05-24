@@ -1,10 +1,13 @@
 package fajl.szovegesFajlok;
 
-import java.awt.*;
-import java.io.*;
 import javax.swing.*;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.rtf.RTFEditorKit;
+import java.awt.*;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 public class Rtf extends JPanel {
 

@@ -1,5 +1,6 @@
+import GUI.Ablak;
+
 import javax.swing.*;
-import GUI.*;
 
 public class Main {
     public static JFrame ablak = new Ablak("Total Commander");

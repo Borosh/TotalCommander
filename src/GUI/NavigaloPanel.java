@@ -1,149 +1,150 @@
 package GUI;
 
-import java.awt.*;
-import java.awt.event.*;
-import java.io.*;
-import java.util.*;
-import javax.swing.*;
-import javax.swing.filechooser.*;
-
-import fajl.*;
+import fajl.FajlAdatok;
+import fajl.FajlLista;
 import navigacio.Navigacio;
+import javax.swing.*;
+import javax.swing.filechooser.FileSystemView;
+import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.io.File;
+import java.util.ArrayList;
 
 public class NavigaloPanel {
 
-	public FajlLista fajlLista = new FajlLista(new File("C:\\"));
-	private ArrayList<DefaultListModel<String>> model = new ArrayList<DefaultListModel<String>>() {
-		{
-			add(new DefaultListModel<String>());
-			add(new DefaultListModel<String>());
-			add(new DefaultListModel<String>());
-			add(new DefaultListModel<String>());
-		}
-	};
-	public ArrayList<JList<String>> lista = new ArrayList<>();
-	private JComboBox<String> particio = new JComboBox<>();
-	private JLabel aktualisMappa = new JLabel();
-	public JPanel fajlok = new JPanel(new GridLayout(1, 4));
-	public JPanel fejLec = new JPanel(new GridLayout(1, 2));
+    public FajlLista fajlLista = new FajlLista(new File("C:\\"));
+    public ArrayList<JList<String>> lista = new ArrayList<>();
+    public JPanel fajlok = new JPanel(new GridLayout(1, 4));
+    public JPanel fejLec = new JPanel(new GridLayout(1, 2));
+    private ArrayList<DefaultListModel<String>> model = new ArrayList<DefaultListModel<String>>() {
+        {
+            add(new DefaultListModel<String>());
+            add(new DefaultListModel<String>());
+            add(new DefaultListModel<String>());
+            add(new DefaultListModel<String>());
+        }
+    };
+    private JComboBox<String> particio = new JComboBox<>();
+    private JLabel aktualisMappa = new JLabel();
 
-	public NavigaloPanel() {
-		for (File j : File.listRoots())
-			if (!FileSystemView.getFileSystemView().getSystemDisplayName(j).equals(""))
-				particio.addItem(FileSystemView.getFileSystemView().getSystemDisplayName(j));
-		aktualisMappa.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 0));
+    public NavigaloPanel() {
+        for (File j : File.listRoots())
+            if (!FileSystemView.getFileSystemView().getSystemDisplayName(j).equals(""))
+                particio.addItem(FileSystemView.getFileSystemView().getSystemDisplayName(j));
+        aktualisMappa.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 0));
 
-		particio.addActionListener(e -> {
-			Navigacio.interakcio(File.listRoots()[particio.getSelectedIndex()]);
-			Ablak.fokuszbanVan.fajlLista.frissit(Ablak.fokuszbanVan.fajlLista.helyzet);
-			Ablak.nincsFokuszban.fajlLista.frissit(Ablak.nincsFokuszban.fajlLista.helyzet);
-		});
-		fejLec.add(particio);
-		fejLec.add(aktualisMappa);
+        particio.addActionListener(e -> {
+            fajlLista.frissit(File.listRoots()[particio.getSelectedIndex()]);
+            Ablak.fokuszbanVan.fajlLista.frissit(Ablak.fokuszbanVan.fajlLista.helyzet);
+            Ablak.nincsFokuszban.fajlLista.frissit(Ablak.nincsFokuszban.fajlLista.helyzet);
+        });
+        fejLec.add(particio);
+        fejLec.add(aktualisMappa);
 
-		fajlok.setBorder(BorderFactory.createLoweredBevelBorder());
-		frissit();
-		for (DefaultListModel<String> i : model)
-			lista.add(new JList<String>(i));
+        fajlok.setBorder(BorderFactory.createLoweredBevelBorder());
+        frissit();
+        for (DefaultListModel<String> i : model)
+            lista.add(new JList<String>(i));
 
-		lista.get(0).setFixedCellWidth(100);
-		lista.get(1).setFixedCellWidth(1);
-		lista.get(2).setFixedCellWidth(20);
-		lista.get(3).setFixedCellWidth(20);
+        lista.get(0).setFixedCellWidth(100);
+        lista.get(1).setFixedCellWidth(1);
+        lista.get(2).setFixedCellWidth(20);
+        lista.get(3).setFixedCellWidth(20);
 
-		for (int i = 0; i < 4; ++i) {
-			lista.get(i).setFixedCellHeight(20);
-			lista.get(i).addMouseListener(this.new AkcioKezelo());
-			lista.get(i).addKeyListener(new GombLenyomasKezelo());
-			fajlok.add(lista.get(i));
-		}
+        for (int i = 0; i < 4; ++i) {
+            lista.get(i).setFixedCellHeight(20);
+            lista.get(i).addMouseListener(this.new AkcioKezelo());
+            lista.get(i).addKeyListener(new GombLenyomasKezelo());
+            fajlok.add(lista.get(i));
+        }
 
-	}
+    }
 
-	public NavigaloPanel getOuter() {
-		return this;
-	}
+    public NavigaloPanel getOuter() {
+        return this;
+    }
 
-	public void novelo(JList<String> kimarad) {
-		
-		for (JList<String> i : lista) {
-			if (!i.equals(kimarad))
-				i.setSelectedIndex(i.getSelectedIndex() + 1);
-		}
-		
-	}
+    public void novelo(JList<String> kimarad) {
 
-	public void csokkento(JList<String> kimarad) {
-		
-		for (JList<String> i : lista) {
-			if (!i.equals(kimarad)) {
-				i.setSelectedIndex(i.getSelectedIndex() - 1);
-			}
+        for (JList<String> i : lista) {
+            if (!i.equals(kimarad))
+                i.setSelectedIndex(kimarad.getSelectedIndex()+1);
+        }
 
-		}
-	}
+    }
 
-	public void frissit() {
-		for (DefaultListModel<String> i : model) {
-			i.removeAllElements();
-		}
-		boolean elso = true;
+    public void csokkento(JList<String> kimarad) {
 
-		for (File j : fajlLista.lista) {
-			if (elso && fajlLista.os != null) {
-				model.get(0).addElement("[ .. ]");
-				model.get(1).addElement("");
-				model.get(2).addElement("");
-				model.get(3).addElement("");
-				elso = false;
-			} else {
-				model.get(0).addElement(FajlAdatok.getNev(j));
-				model.get(1).addElement(FajlAdatok.getKiterjesztes(j));
-				model.get(2).addElement(FajlAdatok.getMeret(j));
-				model.get(3).addElement(FajlAdatok.getDatum(j));
-			}
-		}
-		aktualisMappa.setText(fajlLista.helyzet.getAbsolutePath());
-	}
+        for (JList<String> i : lista) {
+            if (!i.equals(kimarad)) {
+            	if( kimarad.getSelectedIndex() >= 0 )
+            		i.setSelectedIndex(kimarad.getSelectedIndex()-1);
+            	else
+            		i.setSelectedIndex(kimarad.getLastVisibleIndex());
+            }
+        }
+    }
 
-	class AkcioKezelo implements MouseListener {
+    public void frissit() {
+        for (DefaultListModel<String> i : model) {
+            i.removeAllElements();
+        }
+        boolean elso = true;
 
-		public AkcioKezelo() {
-		}
+        for (File j : fajlLista.lista) {
+            if (elso && fajlLista.os != null) {
+                model.get(0).addElement("[ .. ]");
+                model.get(1).addElement("");
+                model.get(2).addElement("");
+                model.get(3).addElement("");
+                elso = false;
+            } else {
+                model.get(0).addElement(FajlAdatok.getNev(j));
+                model.get(1).addElement(FajlAdatok.getKiterjesztes(j));
+                model.get(2).addElement(FajlAdatok.getMeret(j));
+                model.get(3).addElement(FajlAdatok.getDatum(j));
+            }
+        }
+        aktualisMappa.setText(fajlLista.helyzet.getAbsolutePath());
+    }
 
-		public void mouseClicked(MouseEvent e) {
+    class AkcioKezelo implements MouseListener {
 
-			
-		}
+        public AkcioKezelo() {
+        }
 
-		public void mouseEntered(MouseEvent e) {
-		}
+        public void mouseClicked(MouseEvent e) {
+        }
 
-		public void mouseExited(MouseEvent e) {
-		}
+        public void mouseEntered(MouseEvent e) {
+        }
 
-		public void mousePressed(MouseEvent e) {
-		}
+        public void mouseExited(MouseEvent e) {
+        }
 
-		public void mouseReleased(MouseEvent e) {
-			if (e.getSource() instanceof JList) {
+        public void mousePressed(MouseEvent e) {
+        }
 
-				if (Ablak.fokuszbanVan != getOuter())
-					Ablak.fokuszValtas();
-				JList<String> tempList = (JList<String>) (e.getSource());
-				for (JList<String> j : lista) {
-					j.setSelectedIndex(tempList.getSelectedIndex());
-				}
-				for (JList<String> j : Ablak.nincsFokuszban.lista) {
-					j.clearSelection();
-				}
-				if (e.getClickCount() == 2) {
-					Navigacio.interakcio(Ablak.fokuszbanVan.fajlLista.lista.get(tempList.getSelectedIndex()));
-					frissit();
-				}
-			}
-		}
+        public void mouseReleased(MouseEvent e) {
+            if (e.getSource() instanceof JList) {
 
-	}
+                if (Ablak.fokuszbanVan != getOuter())
+                    Ablak.fokuszValtas();
+                JList<String> tempList = (JList<String>) (e.getSource());
+                for (JList<String> j : lista) {
+                    j.setSelectedIndex(tempList.getSelectedIndex());
+                }
+                for (JList<String> j : Ablak.nincsFokuszban.lista) {
+                    j.clearSelection();
+                }
+                if (e.getClickCount() == 2) {
+                    Navigacio.interakcio(Ablak.fokuszbanVan.fajlLista.lista.get(tempList.getSelectedIndex()));
+                    frissit();
+                }
+            }
+        }
+
+    }
 
 }

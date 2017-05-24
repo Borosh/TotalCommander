@@ -1,12 +1,12 @@
 package fajl;
 
-import fajl.kepFajlok.*;
-import fajl.szovegesFajlok.*;
-
-import java.awt.event.WindowEvent;
-import java.io.File;
+import fajl.kepFajlok.Kep;
+import fajl.szovegesFajlok.Rtf;
+import fajl.szovegesFajlok.Txt;
 
 import javax.swing.*;
+import java.awt.event.WindowEvent;
+import java.io.File;
 
 public class FajlNezegeto {
 
@@ -14,7 +14,7 @@ public class FajlNezegeto {
         String kiterjesztes = FajlAdatok.getKiterjesztes(new File(file));
         JFrame ablak = new JFrame(file);
         JPanel fajl = null;
-        ablak.setBounds(200, 50, 600, 600);
+        ablak.setBounds(200, 50, 800, 700);
         ablak.setVisible(true);
         int x = ablak.getContentPane().getWidth();
         int y = ablak.getContentPane().getHeight();
