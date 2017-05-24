@@ -11,16 +11,30 @@ public class Operaciok {
 	public static void masol(Path mit, Path hova) throws Exception {
 		try {
 			if (Files.isDirectory(mit)) {
-				new File(hova.toString() + "\\" + mit.getFileName()).mkdir();
+				if ( mit.equals(hova) )
+					throw new IOException("A célmappa megegyezik a másolandó mappával!");
+				try{
+					new File(hova.toString() + "\\" + mit.getFileName()).mkdir();
+				}catch(Exception e1){
+					throw new IOException("Hiba a másolás során!");
+				}
 				for (String file : new File(mit.toString()).list()) {
 					masol(Paths.get(mit.toString() + "\\" + file),
 							Paths.get(hova.toString() + "\\" + mit.getFileName()));
 				}
 			} else {
-				Files.copy(mit, hova.resolve(mit.getFileName()));
+				if ( mit.getParent().equals(hova) )
+					throw new IOException("A másolandó fájl már létezik a célmappában!");
+				else{
+					try{
+						Files.copy(mit, hova.resolve(mit.getFileName()));
+					}catch(Exception e1){
+						throw new IOException("Hiba a másolás során!");
+					}
+				}
 			}
 		} catch (Exception e) {
-			throw new IOException("Hiba a másolás során!");
+			throw new IOException(e.getMessage());
 		}
 	}
 
