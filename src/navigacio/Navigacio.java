@@ -9,7 +9,7 @@ import java.io.File;
 
 public class Navigacio {
 
-    public static void belelep(File fajl) {
+    private static void belelep(File fajl) {
         Ablak.fokuszbanVan.fajlLista.frissit(fajl);
     }
 

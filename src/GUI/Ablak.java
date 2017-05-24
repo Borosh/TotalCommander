@@ -32,7 +32,7 @@ public class Ablak extends JFrame {
         setVisible(true);
     }
 
-    public static void fokuszValtas() {
+    static void fokuszValtas() {
         NavigaloPanel temp = fokuszbanVan;
         fokuszbanVan = nincsFokuszban;
         nincsFokuszban = temp;

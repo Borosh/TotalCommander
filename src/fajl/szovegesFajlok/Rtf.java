@@ -5,7 +5,6 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.rtf.RTFEditorKit;
 import java.awt.*;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
@@ -13,7 +12,7 @@ public class Rtf extends JPanel {
 
     private static final long serialVersionUID = 1L;
 
-    public Rtf(String path, int x, int y) throws FileNotFoundException, IOException, BadLocationException {
+    public Rtf(String path, int x, int y) throws IOException, BadLocationException {
 
         setBounds(0, 0, x, y);
         setLayout(new GridBagLayout());

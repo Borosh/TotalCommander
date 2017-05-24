@@ -3,32 +3,33 @@ package GUI;
 import fajl.FajlAdatok;
 import fajl.FajlLista;
 import navigacio.Navigacio;
+
 import javax.swing.*;
 import javax.swing.filechooser.FileSystemView;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.io.File;
 import java.util.ArrayList;
 
 public class NavigaloPanel {
 
     public FajlLista fajlLista = new FajlLista(new File("C:\\"));
-    public ArrayList<JList<String>> lista = new ArrayList<>();
-    public JPanel fajlok = new JPanel(new GridLayout(1, 4));
-    public JPanel fejLec = new JPanel(new GridLayout(1, 2));
+    ArrayList<JList<String>> lista = new ArrayList<>();
+    JPanel fajlok = new JPanel(new GridLayout(1, 4));
+    JPanel fejLec = new JPanel(new GridLayout(1, 2));
     private ArrayList<DefaultListModel<String>> model = new ArrayList<DefaultListModel<String>>() {
         {
-            add(new DefaultListModel<String>());
-            add(new DefaultListModel<String>());
-            add(new DefaultListModel<String>());
-            add(new DefaultListModel<String>());
+            add(new DefaultListModel<>());
+            add(new DefaultListModel<>());
+            add(new DefaultListModel<>());
+            add(new DefaultListModel<>());
         }
     };
     private JComboBox<String> particio = new JComboBox<>();
     private JLabel aktualisMappa = new JLabel();
 
-    public NavigaloPanel() {
+    NavigaloPanel() {
         for (File j : File.listRoots())
             if (!FileSystemView.getFileSystemView().getSystemDisplayName(j).equals(""))
                 particio.addItem(FileSystemView.getFileSystemView().getSystemDisplayName(j));
@@ -45,7 +46,7 @@ public class NavigaloPanel {
         fajlok.setBorder(BorderFactory.createLoweredBevelBorder());
         frissit();
         for (DefaultListModel<String> i : model)
-            lista.add(new JList<String>(i));
+            lista.add(new JList<>(i));
 
         lista.get(0).setFixedCellWidth(100);
         lista.get(1).setFixedCellWidth(1);
@@ -61,27 +62,26 @@ public class NavigaloPanel {
 
     }
 
-    public NavigaloPanel getOuter() {
+    NavigaloPanel getOuter() {
         return this;
     }
 
-    public void novelo(JList<String> kimarad) {
+    void novelo(JList<String> kimarad) {
 
         for (JList<String> i : lista) {
             if (!i.equals(kimarad))
-                i.setSelectedIndex(kimarad.getSelectedIndex()+1);
+                i.setSelectedIndex(kimarad.getSelectedIndex() + 1);
         }
-
     }
 
-    public void csokkento(JList<String> kimarad) {
+    void csokkento(JList<String> kimarad) {
 
         for (JList<String> i : lista) {
             if (!i.equals(kimarad)) {
-            	if( kimarad.getSelectedIndex() >= 0 )
-            		i.setSelectedIndex(kimarad.getSelectedIndex()-1);
-            	else
-            		i.setSelectedIndex(kimarad.getLastVisibleIndex());
+                if (kimarad.getSelectedIndex() >= 0)
+                    i.setSelectedIndex(kimarad.getSelectedIndex() - 1);
+                else
+                    i.setSelectedIndex(kimarad.getLastVisibleIndex());
             }
         }
     }
@@ -109,26 +109,9 @@ public class NavigaloPanel {
         aktualisMappa.setText(fajlLista.helyzet.getAbsolutePath());
     }
 
-    class AkcioKezelo implements MouseListener {
-
-        public AkcioKezelo() {
-        }
-
-        public void mouseClicked(MouseEvent e) {
-        }
-
-        public void mouseEntered(MouseEvent e) {
-        }
-
-        public void mouseExited(MouseEvent e) {
-        }
-
-        public void mousePressed(MouseEvent e) {
-        }
-
+    class AkcioKezelo extends MouseAdapter {
         public void mouseReleased(MouseEvent e) {
             if (e.getSource() instanceof JList) {
-
                 if (Ablak.fokuszbanVan != getOuter())
                     Ablak.fokuszValtas();
                 JList<String> tempList = (JList<String>) (e.getSource());

@@ -5,11 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 public class FajlAdatok {
-    // private ImageIcon ikon;
-
     public static ArrayList<String> tamogatott = new ArrayList<String>() {
-        private static final long serialVersionUID = 1L;
-
         {
             add("txt");
             add("rtf");
@@ -24,29 +20,31 @@ public class FajlAdatok {
     public static String getNev(File fajl) {
         if (fajl.isDirectory() || fajl.getAbsolutePath().lastIndexOf(".") < 0) {
             return fajl.getName();
-        } else
+        } else {
             return fajl.getAbsolutePath().substring(fajl.getAbsolutePath().lastIndexOf("\\") + 1,
                     fajl.getAbsolutePath().lastIndexOf("."));
+        }
     }
 
     public static String getKiterjesztes(File fajl) {
-        if (fajl.isDirectory())
+        if (fajl.isDirectory()) {
             return "<DIR>";
-        else {
+        } else {
             String str = fajl.getAbsolutePath().substring(fajl.getAbsolutePath().lastIndexOf(".") + 1);
-            if (str.equals(fajl.getAbsolutePath()))
+            if (str.equals(fajl.getAbsolutePath())) {
                 return "File";
-            else
+            } else {
                 return str;
-
+            }
         }
     }
 
     public static String getMeret(File fajl) {
-        if (fajl.isDirectory())
+        if (fajl.isDirectory()) {
             return "";
-        else
+        } else {
             return Long.toString(fajl.length());
+        }
     }
 
     public static String getDatum(File fajl) {

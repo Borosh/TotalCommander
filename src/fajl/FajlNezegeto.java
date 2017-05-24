@@ -19,14 +19,20 @@ public class FajlNezegeto {
         int x = ablak.getContentPane().getWidth();
         int y = ablak.getContentPane().getHeight();
         try {
-            if (kiterjesztes.equals("rtf")) {
-                fajl = new Rtf(file, x, y);
-            } else if (kiterjesztes.equals("txt")) {
-                fajl = new Txt(file, x, y);
-            } else if (FajlAdatok.tamogatott.contains(kiterjesztes)) {
-                fajl = new Kep(file, x, y);
-            } else {
-                throw new Exception();
+            switch (kiterjesztes) {
+                case "rtf":
+                    fajl = new Rtf(file, x, y);
+                    break;
+                case "txt":
+                    fajl = new Txt(file, x, y);
+                    break;
+                default:
+                    if (FajlAdatok.tamogatott.contains(kiterjesztes)) {
+                        fajl = new Kep(file, x, y);
+                    } else {
+                        throw new Exception();
+                    }
+                    break;
             }
             ablak.add(fajl);
         } catch (Exception e) {

@@ -55,7 +55,8 @@ public class Operaciok {
     public static void ujMappa(Path nev) throws Exception {
         if (!(new File(nev.toString()).exists())) {
             (new File(nev.toString())).mkdirs();
-        } else
+        } else {
             throw new IOException("Ez a mappa már létezik");
+        }
     }
 }
